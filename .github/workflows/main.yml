@@ -44,7 +44,7 @@ jobs:
             --noconfirm -Syu
           buildah run "$ctr" -- pacman \
             --noconfirm -Sy \
-            libplasma
+            libplasma cmake
           buildah commit -- "$ctr" "$IMAGE_NAME"
           buildah rm "$ctr"
 
