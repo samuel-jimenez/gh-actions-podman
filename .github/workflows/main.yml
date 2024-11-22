@@ -51,5 +51,7 @@ jobs:
           podman run \
             --mount type=bind,src=${GITHUB_WORKSPACE},dst=/root/,Z \
             "$IMAGE_NAME" \
-            /usr/bin/ls /root/
+            /usr/bin/touch /root/test
+
+      - run: ls
 
