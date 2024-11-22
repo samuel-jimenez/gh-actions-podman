@@ -28,12 +28,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      - name: Cache packages
-        uses: actions/cache@v3
-        with:
-            path: |
-              /home/runner/.local/share/containers
-            key: no
+
 
       - name: Build with buildah
         run: |
@@ -56,5 +51,5 @@ jobs:
           podman run \
             --mount type=bind,src=${GITHUB_WORKSPACE},dst=/root/,Z \
             "$IMAGE_NAME" \
-            /usr/bin/cmake
+            /usr/bin/ls /root/
 
