@@ -39,9 +39,12 @@ jobs:
         run: |
           ctr=$(buildah from "archlinux")
           buildah config \
-            --cmd /usr/bin/ls $ctr
+            --cmd /usr/bin/bash $ctr
           buildah run "$ctr" -- pacman \
             --noconfirm -Syu
+          buildah run "$ctr" -- pacman \
+            --noconfirm -Sy \
+            libplasma
           buildah commit -- "$ctr" "$IMAGE_NAME"
           buildah rm "$ctr"
 
@@ -51,9 +54,7 @@ jobs:
       - name: Run podman
         run: |
           podman run \
-            --mount type=bind,src=${GITHUB_WORKSPACE},dst=/root/,Z "$IMAGE_NAME"
+            --mount type=bind,src=${GITHUB_WORKSPACE},dst=/root/,Z \
+            "$IMAGE_NAME" \
+            /usr/bin/cmake
 
-
-
-      - name: done
-        run: echo "done"
