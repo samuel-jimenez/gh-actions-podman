@@ -53,5 +53,5 @@ jobs:
             "$IMAGE_NAME" \
             /usr/bin/touch /root/test
 
-      - run: ls
+      - run: ls -lasZ
 
